@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TestDatabaseCleaner {
 
+    private final com.project.autoscaling.alerts.repository.AlertRepository alertRepository;
     private final ScalingEventRepository eventRepository;
     private final ScalingRecommendationRepository recommendationRepository;
     private final ScalingPolicyRepository policyRepository;
@@ -27,6 +28,7 @@ public class TestDatabaseCleaner {
 
     @Transactional
     public void clean() {
+        alertRepository.deleteAll();
         eventRepository.deleteAll();
         recommendationRepository.deleteAll();
         policyRepository.deleteAll();
