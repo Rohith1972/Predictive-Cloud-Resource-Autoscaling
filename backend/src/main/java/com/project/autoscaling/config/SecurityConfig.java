@@ -72,7 +72,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/scaling/recommendations/*/reject").hasRole("ADMIN")
                         .requestMatchers("/api/v1/scaling/evaluate/**").hasRole("ADMIN")
 
-                        .requestMatchers("/api/v1/simulation/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/simulation/start/**", "/api/v1/simulation/stop/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/alerts/**").hasRole("ADMIN")
 
                         // All other authenticated endpoints (accessible by ADMIN and VIEWER)
