@@ -2,6 +2,8 @@ package com.project.autoscaling.infrastructure.repository;
 
 import com.project.autoscaling.common.enums.InstanceStatus;
 import com.project.autoscaling.infrastructure.entity.Instance;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public interface InstanceRepository extends JpaRepository<Instance, Long> {
     Optional<Instance> findByInstanceIdentifier(String instanceIdentifier);
     boolean existsByInstanceIdentifier(String instanceIdentifier);
+    Page<Instance> findByStatus(InstanceStatus status, Pageable pageable);
     List<Instance> findByApplicationId(Long applicationId);
     List<Instance> findByApplicationIdAndStatus(Long applicationId, InstanceStatus status);
     long countByApplicationId(Long applicationId);
