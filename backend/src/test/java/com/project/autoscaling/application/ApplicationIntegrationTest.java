@@ -43,6 +43,9 @@ class ApplicationIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
+    private com.project.autoscaling.test.TestDatabaseCleaner cleaner;
+
+    @Autowired
     private ApplicationRepository applicationRepository;
 
     @Autowired
@@ -62,9 +65,7 @@ class ApplicationIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        instanceRepository.deleteAll();
-        applicationRepository.deleteAll();
-        userRepository.deleteAll();
+        cleaner.clean();
 
         User admin = userRepository.save(User.builder()
                 .fullName("Admin")

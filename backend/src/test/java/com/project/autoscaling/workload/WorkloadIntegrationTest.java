@@ -43,13 +43,7 @@ class WorkloadIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private WorkloadMetricRepository workloadRepository;
-
-    @Autowired
-    private com.project.autoscaling.monitoring.repository.ResourceMetricRepository metricRepository;
-
-    @Autowired
-    private com.project.autoscaling.infrastructure.repository.InstanceRepository instanceRepository;
+    private com.project.autoscaling.test.TestDatabaseCleaner cleaner;
 
     @Autowired
     private ApplicationRepository applicationRepository;
@@ -68,11 +62,7 @@ class WorkloadIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        workloadRepository.deleteAll();
-        metricRepository.deleteAll();
-        instanceRepository.deleteAll();
-        applicationRepository.deleteAll();
-        userRepository.deleteAll();
+        cleaner.clean();
 
         User user = userRepository.save(User.builder()
                 .fullName("Workload User")

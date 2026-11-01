@@ -46,16 +46,7 @@ class ScalingPolicyIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private ScalingPolicyRepository policyRepository;
-
-    @Autowired
-    private WorkloadMetricRepository workloadRepository;
-
-    @Autowired
-    private ResourceMetricRepository metricRepository;
-
-    @Autowired
-    private InstanceRepository instanceRepository;
+    private com.project.autoscaling.test.TestDatabaseCleaner cleaner;
 
     @Autowired
     private ApplicationRepository applicationRepository;
@@ -75,12 +66,7 @@ class ScalingPolicyIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        policyRepository.deleteAll();
-        workloadRepository.deleteAll();
-        metricRepository.deleteAll();
-        instanceRepository.deleteAll();
-        applicationRepository.deleteAll();
-        userRepository.deleteAll();
+        cleaner.clean();
 
         User admin = userRepository.save(User.builder()
                 .fullName("Policy Admin")

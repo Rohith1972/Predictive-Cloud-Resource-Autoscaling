@@ -45,13 +45,13 @@ class MonitoringIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private ResourceMetricRepository metricRepository;
-
-    @Autowired
-    private InstanceRepository instanceRepository;
+    private com.project.autoscaling.test.TestDatabaseCleaner cleaner;
 
     @Autowired
     private ApplicationRepository applicationRepository;
+
+    @Autowired
+    private InstanceRepository instanceRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -68,10 +68,7 @@ class MonitoringIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        metricRepository.deleteAll();
-        instanceRepository.deleteAll();
-        applicationRepository.deleteAll();
-        userRepository.deleteAll();
+        cleaner.clean();
 
         User user = userRepository.save(User.builder()
                 .fullName("Monitor User")
